@@ -1,5 +1,5 @@
 import threading
-import os
+import time
 import math
 
 def thread(i,j,arrays):
@@ -20,6 +20,9 @@ def sumaCREW(arrays):
     print(arrays)
 
 def main():
+    # Array de ejemplo:
+    # arrays = [0,5,2,10,1,8,12,7,3]
+    # Resultado: [0, 5, 7, 17, 18, 26, 38, 45, 48]
     arrays = []
     i = 1
     titulo = "\t02 Suma CREW"

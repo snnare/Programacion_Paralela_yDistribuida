@@ -6,11 +6,12 @@ import time
 def executeThread(i, j, A):
     if (((2 * j) % (math.pow(2, i))) == 0):
         A[2 * j] = A[2 * j] + A[((2 * j) - ((int)(math.pow(2, i - 1))))]
-    time.sleep(5)
+    time.sleep(1)
 
 
 def main():
-    A = [0, 1, 1, 1, 1, 1, 1, 1, 1]
+    #A = [0, 1, 1, 1, 1, 1, 1, 1, 1]
+    A = [0, 5, 2, 10, 1, 8, 12, 7, 3]
     print(A)
 
     a = len(A) - 1
