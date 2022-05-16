@@ -8,11 +8,10 @@ B=[[0 for _ in range(2)] for _ in range(2)]
 C=[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
 C2=[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
 
-
-def hilo1(i,j,k):
+def thread1(i,j,k):
     C[k][i][j]=int(A[i][k])* int(B[k][j])
 
-def hilo2(i,j,k,l):
+def thread2(i,j,k,l):
     if(((2*k) % (2 **l))==0):
         C2[2*k][i][j]=int(C[2*k][i][j]+C[2*k-(2**(l))][i][j])
 
@@ -52,7 +51,7 @@ def main():
         while (i < 2):
             j = 0
             while (j < 2):
-                t = threading.Thread(target=hilo1, args=(i, j, k))
+                t = threading.Thread(target=thread1(i,j,k))
                 t.start()
                 t.join()
                 j+=1
@@ -68,7 +67,7 @@ def main():
             while (j < 2):
                 k = 0
                 while (k < 1):
-                    t = threading.Thread(target=hilo2, args=(i, j, k, l))
+                    t = threading.Thread(target=thread2(i,j,k,l))
                     t.start()
                     t.join()
                     k = k + 1
@@ -76,8 +75,9 @@ def main():
             i += 1
         l +=  1
     print ( "\nRESULTADO de A X B: \n" )
-    print ("          [ ", C2[0][0][0], "  ", C2[0][0][1], " ]" )
-    print ("          [ ", C2[0][1][0], "  ", C2[0][1][1], " ]")
+    print ("        [ ", C2[0][0][0], "  ", C2[0][0][1], " ]" )
+    print ("        [ ", C2[0][1][0], "  ", C2[0][1][1], " ]")
+
 
 
 if __name__ == '__main__':
