@@ -1,12 +1,10 @@
 import threading
 import math
 
-
-
-A=[[0 for _ in range(2)] for _ in range(2)]
-B=[[0 for _ in range(2)] for _ in range(2)]
-C=[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
-C2=[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
+A  =[[0 for _ in range(2)]  for _ in range(2)]
+B  =[[0 for _ in range(2)]  for _ in range(2)]
+C  =[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
+C2 =[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
 
 def thread1(i,j,k):
     C[k][i][j]=int(A[i][k])* int(B[k][j])
