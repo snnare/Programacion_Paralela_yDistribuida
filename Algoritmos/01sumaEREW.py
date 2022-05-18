@@ -2,7 +2,6 @@
 Profesor: Elfego Gutierrez Ocampo
 Alumno: Jose Angel Romero Rios
 '''
-
 import threading
 import math
 
