@@ -1,3 +1,7 @@
+''' Programa 02 SUMA CREW
+Profesor: Elfego Gutierrez Ocampo
+Alumno: Jose Angel Romero Rios
+'''
 import threading
 import math
 
