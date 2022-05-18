@@ -1,12 +1,12 @@
-''' Programa 02 SUMA CREW
+''' Programa 07  Multiplicacion Matrices
 Profesor: Elfego Gutierrez Ocampo
 Alumno: Jose Angel Romero Rios
 '''
 import threading
 import math
 
-A  =[[0 for _ in range(2)]  for _ in range(2)]
-B  =[[0 for _ in range(2)]  for _ in range(2)]
+A  =[[0 for _ in range(4)]  for _ in range(2)]
+B  =[[0 for _ in range(4)]  for _ in range(2)]
 C  =[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
 C2 =[[[0 for _ in range(2)] for _ in range(2)] for _ in range(2)]
 

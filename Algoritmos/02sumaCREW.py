@@ -9,7 +9,6 @@ import math
 def  thread01(i,j,A,B):
     B[j]=A[j]+A[(j-2**((i)-1))]
 
-
 def sumaEREW():
     A = [0, 5, 2, 10, 1, 8, 12, 7, 3]
     B = A.copy()
