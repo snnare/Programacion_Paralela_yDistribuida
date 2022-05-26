@@ -1,41 +1,35 @@
-from multiprocessing import Pool, TimeoutError
-import time
-import os
+''' Programa 01 SUMA EREW
+Profesor: Elfego Gutierrez Ocampo
+Alumno: Jose Angel Romero Rios
+'''
+import threading
+import math
+import multiprocessing
 
-def f(x):
-    return x*x
+def executeProcess(i, j, A):
+    if (((2 * j) % (math.pow(2, i))) == 0):
+        A[2 * j] = A[2 * j] + A[((2 * j) - ((int)(math.pow(2, i - 1))))]
+
+def main():
+    print("-" * 37)
+    print("\t \t  \t Suma EREW")
+    print("-" * 37)
+    A = [0, 5, 2, 10, 1, 8, 12, 7, 3]
+    print(A)
+    n = len(A) - 1
+    log = int(math.log(n, 2))
+
+    for i in range(1, log + 1):
+        for j in range(1, (int)(n / 2) + 1):
+            p = multiprocessing.Process(target=executeProcess,args=(i,j,A))
+            p.run()
+            p.start()
+            p.join()
+            print("Proceso vivo: ", p.is_alive)
+        print("-->",A)
+    print("-" * 37)
+    print("Resultado: ",A[n])
+    print("-" * 37)
 
 if __name__ == '__main__':
-    # start 4 worker processes
-    with Pool(processes=4) as pool:
-
-        # print "[0, 1, 4,..., 81]"
-        print(pool.map(f, range(10)))
-
-        # print same numbers in arbitrary order
-        for i in pool.imap_unordered(f, range(10)):
-            print(i)
-
-        # evaluate "f(20)" asynchronously
-        res = pool.apply_async(f, (20,))      # runs in *only* one process
-        print(res.get(timeout=1))             # prints "400"
-
-        # evaluate "os.getpid()" asynchronously
-        res = pool.apply_async(os.getpid, ()) # runs in *only* one process
-        print(res.get(timeout=1))             # prints the PID of that process
-
-        # launching multiple evaluations asynchronously *may* use more processes
-        multiple_results = [pool.apply_async(os.getpid, ()) for i in range(4)]
-        print([res.get(timeout=1) for res in multiple_results])
-
-        # make a single worker sleep for 10 secs
-        res = pool.apply_async(time.sleep, (10,))
-        try:
-            print(res.get(timeout=1))
-        except TimeoutError:
-            print("We lacked patience and got a multiprocessing.TimeoutError")
-
-        print("For the moment, the pool remains available for more work")
-
-    # exiting the 'with'-block has stopped the pool
-    print("Now the pool is closed and no longer available")
+    main()
