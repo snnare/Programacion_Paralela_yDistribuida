@@ -62,6 +62,6 @@ def main(L):
 
 if __name__ == '__main__':
     # Arreglo a ordenar:
-    L = [95, 10, 6, 5]
+    L = [95, 1, 6, 5]
     print('Arreglo Desordenado:', L)
     main(L)

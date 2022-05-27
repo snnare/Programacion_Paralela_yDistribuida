@@ -5,10 +5,8 @@ Alumno: Jose Angel Romero Rios
 
 import threading
 
-
 def executeThreadMinCRCW1(win, i):
     win[i] = 0
-
 
 def executeThreadMinCRCW2(L, win, i, j):
     if (L[i] > L[j]):
@@ -24,7 +22,8 @@ def executeThreadMinCRCW3(win, i, indexMin):
 
 def minCRCW(L):
     N = len(L) - 1
-    win = [None for _ in range(N + 1)]
+    win = [9 for _ in range (N+1)]
+    #win = [None for _ in range(N + 1)]
     win[0] = 0
 
     list_threads = []
@@ -60,7 +59,7 @@ def minCRCW(L):
     return L[indexMin[0]]
 
 
-L = [95, 10, 6, 5]
+L = [95, 1, 6, 5]
 print('Arreglo original:', L)
 
 minCRCW(L)

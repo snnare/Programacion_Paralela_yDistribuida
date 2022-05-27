@@ -14,7 +14,7 @@ def main():
     print("-" * 37)
     print("\t \t  \t Suma EREW")
     print("-" * 37)
-    A = [0, 5, 2, 10, 1, 8, 12, 7, 3]
+    A = [0, 1, 1, 1, 1, 1, 1, 1, 1]
     print(A)
     n = len(A) - 1
     log = int(math.log(n, 2))
@@ -25,11 +25,12 @@ def main():
             p.run()
             p.start()
             p.join()
-            print("Proceso vivo: ", p.is_alive)
+            print(p.is_alive())
         print("-->",A)
     print("-" * 37)
     print("Resultado: ",A[n])
     print("-" * 37)
+
 
 if __name__ == '__main__':
     main()

@@ -11,7 +11,7 @@ def  process(i,j,A):
         A[j] = A[j] + A[j - ((int)(math.pow(2,i-1)))]
         print(A[1:9])
 
-def sumaEREW():
+def sumaCREW():
     A = [0, 5, 2, 10, 1, 8, 12, 7, 3]
     n = len(A) - 1
     lg = int(math.log(n, 2))
@@ -33,7 +33,7 @@ def sumaEREW():
     print("Suma total es: -->",A[n])
 
 def main():
-    sumaEREW()
+    sumaCREW()
 
 
 if __name__ == '__main__':
