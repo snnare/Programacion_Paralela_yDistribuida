@@ -2,64 +2,60 @@
 Profesor: Elfego Gutierrez Ocampo
 Alumno: Jose Angel Romero Rios
 '''
-
 import threading
 
-def executeThreadMinCRCW1(win, i):
-    win[i] = 0
+def executeThread01(Win, i):
+    Win[i] = 0
 
-def executeThreadMinCRCW2(L, win, i, j):
+def executeThread02(L, Win, i, j):
     if (L[i] > L[j]):
-        win[i] = 1
+        Win[i] = 1
     else:
-        win[j] = 1
+        Win[j] = 1
+
+def executeThread03(Win, i, ind):
+    if (Win[i] == 0):
+        ind[0] = i
+
+def main():
+    # Prueba 1
+    # L = [95,1,6,15]
+    # Prueba 2
+    L = [95, 1, 6, 15]
+    Win=[1,1,1,1,1,1,1,1,1,1,1,1,1]
+    index=[1000000000000000000000000]
+    i = 0
+    n =len(L)
+    print('\tBusqueda CRCW')
+    print('Vector original: {}'.format(L))
+    while i < n :
+        if i >= 0:
+            thread = threading.Thread(target=executeThread01, args =(Win,i))
+            thread.start()
+            thread.join()
+        i+=1
+    i = 0
+    j= i + 1
+    print("Win {}".format(Win[:len(L)]))
+    while j < n:
+        if i < j:
+            if i >= 0:
+                thread = threading.Thread(target=executeThread02, args=(L, Win, i, j))
+                thread.start()
+                thread.join()
+        i+=1
+        j+=1
+    i = 0
+    print("Win {}".format(Win[:len(L)]))
+    while(i<n):
+        if(i>=0):
+            thread = threading.Thread(target=executeThread03, args = (Win,i,index))
+            thread.start()
+            thread.join()
+            i+=1
+    print("Valor minimo: {}".format(L[index[0]]))
 
 
-def executeThreadMinCRCW3(win, i, indexMin):
-    if (win[i] == 0):
-        indexMin[0] = i
 
-
-def minCRCW(L):
-    N = len(L) - 1
-    win = [9 for _ in range (N+1)]
-    #win = [None for _ in range(N + 1)]
-    win[0] = 0
-
-    list_threads = []
-
-    for i in range(1, N + 1):
-        thread = threading.Thread(target=executeThreadMinCRCW1, args=(win, i))
-        list_threads.append(thread)
-        thread.start()
-    for hilo in list_threads:
-        hilo.join()
-    list_threads = []
-
-    for j in range(1, N + 1):
-        i = j - 1
-        thread = threading.Thread(target=executeThreadMinCRCW2, args=(L, win, i, j))
-        list_threads.append(thread)
-        thread.start()
-    for hilo in list_threads:
-        hilo.join()
-    list_threads = []
-
-    indexMin = [0]
-    for i in range(1, N + 1):
-        thread = threading.Thread(target=executeThreadMinCRCW3, args=(win, i, indexMin))
-        list_threads.append(thread)
-        thread.start()
-
-    for hilo in list_threads:
-        hilo.join()
-
-    print(win)
-    print('indice minimo es:', indexMin, 'El número más pequeño es:', L[indexMin[0]])
-    return L[indexMin[0]]
-
-
-L = [95, 1, 6, 5]
-print('Arreglo original:', L)
-
-minCRCW(L)
+if __name__ == '__main__':
+    main()

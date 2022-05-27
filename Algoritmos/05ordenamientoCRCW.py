@@ -4,6 +4,7 @@ Alumno: Jose Angel Romero Rios
 '''
 
 import threading
+import threading
 
 def thread01(win, i):
     win[i] = 0
