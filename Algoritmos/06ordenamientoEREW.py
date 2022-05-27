@@ -6,37 +6,41 @@ Alumno: Jose Angel Romero Rios
 import threading
 import time
 
-def thread01(L, i, odd, even):
-    L[2 * i] = odd[i]
-    L[2 * i + 1] = even[i]
 
-def thread02(L, i, Laux):
-    if (L[2 * i + 1] < L[2 * i]):
-        L[2 * i + 1], L[2 * i] = interchange(L[2 * i + 1], L[2 * i])
+def executeThread01(a, i, odd, even):
+    a[2 * i] = odd[i]
+    a[2 * i + 1] = even[i]
 
-def interchange(L1, L2):
-    aux = L1
-    L1 = L2
-    L2 = aux
-    return L1, L2
+def executeThread02(a, i, Laux):
+    if (a[2 * i + 1] < a[2 * i]):
+        a[2 * i + 1], a[2 * i] = interchange(a[2 * i + 1], a[2 * i])
 
-def oddEvenSplit(L):
-    n = len(L)
+def interchange(b, c):
+    aux = b
+    b = c
+    c = aux
+    return b, c
+
+def oddEvenSplit(a):
+    n = len(a)
     aux = int(n / 2)
-    L1 = L[0:aux]
-    L2 = L[aux:n]
-    return (L1, L2)
+    b = a[0:aux]
+    c = a[aux:n]
+    return (b, c)
 
-def oddEvenMergePRAM(L):
-    n = len(L)
+
+def oddEvenMergePRAM(a):
+    n = len(a)
     if n == 2:
-        if (L[0] > L[1]):
-            L[0], L[1] = interchange(L[0], L[1])
+        if (a[0] > a[1]):
+            a[0], a[1] = interchange(a[0], a[1])
     else:
-        odd, even = oddEvenSplit(L)
+        odd, even = oddEvenSplit(a)
         oddEvenMergePRAM(odd)
         oddEvenMergePRAM(even)
         return (odd, even)
+
+
 
 def main():
     L = [16, 22, 35, 40, 55, 66, 70, 85, 15, 18, 23, 53, 60, 69, 72, 78]
@@ -50,13 +54,13 @@ def main():
     n = len(L)
 
     for i in range(0, int(n / 2)):
-        thread = threading.Thread(target=thread01, args=(L, i, even, odd))
+        thread = threading.Thread(target=executeThread01, args=(L, i, even, odd))
         thread.start()
         thread.join()
 
     lCopy = L.copy()
     for i in range(0, int(n / 2)):
-        thread = threading.Thread(target=thread02, args=(L, i, lCopy))
+        thread = threading.Thread(target=executeThread02, args=(L, i, lCopy))
         thread.start()
         thread.join()
     print('-' * 63)
